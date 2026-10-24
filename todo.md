@@ -48,47 +48,43 @@
 - [ ] Открыть созданный файл блокнота .ipynb и запустить тест
   * *Шаг 1:* В правом верхнем углу выбрать ядро (Kernel) -> выбрать наш `.venv`.
   * *Шаг 2:* Вставить в первую ячейку тестовый код:
-    ```python
- import numpy as np
- import pandas as pd
- import seaborn as sns
+ ```python
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
 
+# 1. Проверяем версии ключевых библиотек
+print("✅ Успешный импорт!")
+print(f"Версия Pandas: {pd.__version__}")
+print(f"Версия NumPy: {np.__version__}")
+print(f"Версия Seaborn: {sns.__version__}")
+print("-" * 30)
 
- # 1. Проверяем версии ключевых библиотек
- print(f"✅ Успешный импорт!")
- print(f"Версия Pandas: {pd.__version__}")
- print(f"Версия NumPy: {np.__version__}")
- print(f"Версия Seaborn: {sns.__version__}")
- print("-" * 30)
+# 2. Создаем тестовые данные с помощью NumPy и Pandas
+np.random.seed(42)
+data = pd.DataFrame(
+    {
+        "Месяц": np.repeat(["Янв", "Фев", "Мар", "Апр", "Май", "Июн"], 2),
+        "Категория": ["Продажи", "Маркетинг"] * 6,
+        "Выручка (тыс.\$)": np.random.randint(20, 100, size=12),
+    }
+)
+print("📊 Тестовый датафрейм создан:")
+print(data.head(4))
 
- # 2. Создаем тестовые данные с помощью NumPy и Pandas
- np.random.seed(42)
- data = pd.DataFrame({
-    "Месяц": np.repeat(["Янв", "Фев", "Мар", "Апр", "Май", "Июн"], 2),
-    "Категория": ["Продажи", "Маркетинг"] * 6,
-    "Выручка (тыс.$)": np.random.randint(20, 100, size=12)
- })
- print("📊 Тестовый датафрейм создан:")
- print(data.head(4))
+# 3. Строим графическую визуализацию через Seaborn и Matplotlib
+plt.figure(figsize=(9, 5))
+sns.set_theme(style="whitegrid")
+sns.barplot(
+    x="Месяц", y="Выручка (тыс.\$)", hue="Категория", data=data, palette="muted"
+)
+plt.title("Тестовый график: Динамика выручки по отделам", fontsize=14)
+plt.xlabel("Период", fontsize=11)
+plt.ylabel("Сумма (тыс. \$)", fontsize=11)
+plt.show()
+```
 
- # 3. Строим графическую визуализацию через Seaborn и Matplotlib
- plt.figure(figsize=(9, 5))
- sns.set_theme(style="whitegrid")
-
- sns.barplot(
-    x="Месяц",
-    y="Выручка (тыс.$)",
-    hue="Категория",
-    data=data,
-    palette="muted"
- )
- 
- plt.title("Тестовый график: Динамика выручки по отделам", fontsize=14)
- plt.xlabel("Период", fontsize=11)
- plt.ylabel("Сумма (тыс. $)", fontsize=11)
-
- plt.show()
-    ```
   * *Шаг 3:* Запустить ячейку. Если график построился и ошибок нет — **удалить этот тестовый код** и приступать к работе.
 
 ## 💻 Перенос проекта на другой компьютер (Windows)
